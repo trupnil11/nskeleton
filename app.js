@@ -3,8 +3,8 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import Webroute from './routes/web.route.js';
+import ApiRoute from './routes/api.route.js';
 import * as mongoDbConfig from "./config/db.config.js";
-
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +26,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.use('/',Webroute);
+app.use('/api/',ApiRoute);
 app.listen(process.env.PORT,()=>{
     console.log(`App is listing `+ process.env.PORT);
 })
