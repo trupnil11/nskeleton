@@ -27,12 +27,16 @@
         </div>
         <div class="row mt-6">
             <div class="col-md-8 mx-auto text-center">
-                <h1>Node Js framework</h1>
+                <h1>Nskeleton node js framework</h1>
                 <p class="lead mb-5">Nskeleton is a lightweight CLI Based, extensible node js framework, built with modern web
                     standards with express js in mind. It’s used in thousands of websites, including some of those you visit daily.</p>
                 <a href="https://github.com/trupnil11/nskeleton" class="btn btn-success svg-icon">
                     <em class="mr-2" data-feather="github"></em>
                     Contribute on github
+                </a>
+                <a href="https://github.com/trupnil11/nskeleton" class="btn btn-success svg-icon">
+                    <em class="mr-2" data-feather="github"></em>
+                    Documentation
                 </a>
             </div>
         </div>
@@ -45,31 +49,18 @@
                         <div class="green"></div>
                     </div>
                     <div class="dots">
-                        <div><p>App.js</p></div>
+                        <div><h6>command:list</h6></div>
                         
                     </div>
-                    <pre class="language-javascript line-numbers"><code class="language-javascript">import express from 'express';
-import path from 'path';
-import cors from 'cors';
-import Webroute from './routes/web.route.js';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config();
-const app = express();
-var corsOption = {
-    origin: "*",
-};
-app.use(cors(corsOption));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
-app.use('/',Webroute);
-app.listen(process.env.PORT,()=>{
-    console.log(`App is listing `+ process.env.PORT);
-})</code></pre>
+                    <pre class="language-javascript line-numbers"><code class="language-javascript">nskeleton make:route --route=users
+nskeleton make:model --model=user
+nskeleton make:controller --controller=users
+nskeleton make:helper --helper=helper
+nskeleton make:feature --feature=feature
+nskeleton make:config --config=users
+nskeleton make:util --util=users</code></pre>
+
+
                 </div>
             </div>
         </div>

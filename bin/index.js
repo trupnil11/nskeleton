@@ -3,22 +3,40 @@ import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import fs from "fs";
 import chalk from "chalk";
+import figlet from "figlet";
 
 const argv = yargs(hideBin(process.argv)).argv;
 //Create a new route file in routes folder
 yargs(hideBin(process.argv))
   .command({
     command: "make:route",
-    describe: "api make module folder",
+    describe: "Route file creat function",
     handler: (argv) => {
-      fs.writeFile(
-        "./routes/" + argv.route + ".routes.js",
-        "//Route is created...",
-        function (err) {
-          if (err) throw err;
-          console.log(argv.route + " route is created successfully.");
+      if (!argv.route) {
+        console.log(chalk.red("[Error...] Please provide route name"));
+      } else {
+        if (fs.existsSync("routes/" + argv.route + ".routes.js")) {
+          console.log(
+            chalk.red("[Error...]" + argv.route + " route is already exist.")
+          );
+        } else {
+          fs.writeFile(
+            "./routes/" + argv.route + ".routes.js",
+            `//Global route file
+            import { Router } from 'express'
+             const router = Router();
+             router.get('',function(req,res,next){
+             }) 
+             export default router;`,
+            function (err) {
+              if (err) throw err;
+              console.log(
+                chalk.green(argv.route + " route created successfully.")
+              );
+            }
+          );
         }
-      );
+      }
     },
   })
   .parse();
@@ -39,7 +57,9 @@ yargs(hideBin(process.argv))
             "//Helper is created successfully....",
             function (err) {
               if (err) throw err;
-              console.log(chalk.green(argv.helper + " helper is created successfully."));
+              console.log(
+                chalk.green(argv.helper + " helper is created successfully.")
+              );
             }
           );
         }
@@ -111,7 +131,9 @@ yargs(hideBin(process.argv))
               "//Helper is created successfully....",
               function (err) {
                 if (err) throw err;
-                console.log(chalk.green(argv.feature + " helper is created successfully."));
+                console.log(
+                  chalk.green(argv.feature + " helper is created successfully.")
+                );
               }
             );
             fs.writeFile(
@@ -119,7 +141,9 @@ yargs(hideBin(process.argv))
               "//Route is created successfully....",
               function (err) {
                 if (err) throw err;
-                console.log(chalk.green(argv.feature + " route is created successfully."));
+                console.log(
+                  chalk.green(argv.feature + " route is created successfully.")
+                );
               }
             );
             fs.writeFile(
@@ -132,7 +156,9 @@ yargs(hideBin(process.argv))
               function (err) {
                 if (err) throw err;
                 console.log(
-                    chalk.green(argv.feature + " validator is created successfully.")
+                  chalk.green(
+                    argv.feature + " validator is created successfully."
+                  )
                 );
               }
             );
@@ -141,7 +167,11 @@ yargs(hideBin(process.argv))
               "//service is created successfully....",
               function (err) {
                 if (err) throw err;
-                console.log(chalk.green(argv.feature + " service is created successfully."));
+                console.log(
+                  chalk.green(
+                    argv.feature + " service is created successfully."
+                  )
+                );
               }
             );
             fs.writeFile(
@@ -154,16 +184,49 @@ yargs(hideBin(process.argv))
               function (err) {
                 if (err) throw err;
                 console.log(
-                    chalk.green(argv.feature + " controller is created successfully.")
+                  chalk.green(
+                    argv.feature + " controller is created successfully."
+                  )
                 );
               }
             );
           } catch (e) {
             console.error(e);
           }
-          console.log(chalk.green(argv.feature + " Feature is created successfully."));
+          console.log(
+            chalk.green(argv.feature + " Feature is created successfully.")
+          );
         }
       }
     },
   })
   .parse();
+
+//Utils creation command
+yargs(hideBin(process.argv))
+  .command({
+    command: "info",
+    describe: "Information of nskeleton",
+    handler: (argv) => {
+      console.log(
+        chalk.redBright(
+          figlet.textSync("NSKELETON", { horizontalLayout: "full" })
+        )
+      );
+      console.log(
+        chalk.cyanBright("\t Made by : Trupnil barot from xcitech technologies. \n open source framwork a Specially design for build a micro services.")
+      );
+    },
+  })
+  .parse();
+
+  //Server stat
+  // yargs(hideBin(process.argv))
+  // .usage("About: Light weighted open source micro framework, aspecially deisgn for build micro services")
+  // .option("route", {
+  //   alias: "r",
+  //   describe: "nskeleton make:route --route=<route_name>",
+  //   demandOption: "The width is required.",
+    
+  // })
+  // .parse();
