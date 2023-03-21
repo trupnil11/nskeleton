@@ -5086,12 +5086,12 @@ footer a {
 
 /*Gradients*/
 .bg-gradient {
-  background: linear-gradient(#ffff00, #ffff4d); }
+  background: linear-gradient(#7dbe42, #8eb56a); }
 
 /*Code Window*/
 .code-window {
   border-radius: .45rem;
-  background-color: #ffffff;
+  background-color: #000000;
   padding: 1.52rem;
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1); }
   .code-window .dots {
@@ -5123,7 +5123,7 @@ footer a {
  */
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #000000;
+  color: #ffffff;
   background: none;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   text-align: left;
@@ -5219,8 +5219,9 @@ pre[class*="language-"] {
 
 pre[class*="language-"].line-numbers {
   position: relative;
-  padding-left: 2.5em;
-  counter-reset: linenumber; }
+  /* padding-left: 2.5em; */
+  counter-reset: linenumber;
+  background: black; }
 
 pre[class*="language-"].line-numbers > code {
   position: relative;

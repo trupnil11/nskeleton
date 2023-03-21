@@ -4,6 +4,7 @@ import { hideBin } from "yargs/helpers";
 import fs from "fs";
 import chalk from "chalk";
 import figlet from "figlet";
+import exec from "child_process";
 
 const argv = yargs(hideBin(process.argv)).argv;
 //Create a new route file in routes folder
@@ -230,3 +231,57 @@ yargs(hideBin(process.argv))
     
   // })
   // .parse();
+
+//Jwt authentication file setup
+yargs(hideBin(process.argv))
+  .command({
+    command: "jwt-g",
+    describe: "Generate jwt authentication middleware",
+    handler: (argv) => {
+      exec.exec('npm i jsonwebtoken', (err, stdout, stderr) => {  
+        if (err) {  
+          console.error(err);  
+          return;  
+        }  
+        console.log(stdout);
+        if (fs.existsSync("middlewares/jwt-auth.middleware.js")) {
+          console.log(chalk.red("[Error...] jwt middleware is already exist"));
+        } else {
+          fs.writeFile(
+            "./middlewares/jwt-auth.middleware.js",
+            `const jwt = require('jsonwebtoken');
+            exports.tokenVerify = function(req,res,next){
+               try{
+                    let secretKey = process.env.JWT_SECRET_KEY;
+                    let token =req.headers['authorization'].split(' ')[1] //Remove for Bearer word
+                    if(token){
+                        if(jwt.verify(token,secretKey)){
+                           next();
+                        }else{
+                            res.status(401).json({auth:false,"message":"Unauthorised token"})
+                        }
+                    }
+                    else
+                    {
+                      throw new Error({"message":"Unauthorised token"});
+                    }
+                }
+                catch(e){
+                    res.status(401).json({auth:false,"message":"Unauthorised token"})
+                }
+            }
+            `,
+            function (err) {
+              if (err) throw err;
+              console.log(
+                chalk.green("Jwt auth is successfully generated...")
+              );
+            }
+          );
+        }
+
+        
+      });  
+    },
+  })
+  .parse();
