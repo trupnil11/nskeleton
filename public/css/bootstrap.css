@@ -1696,9 +1696,9 @@ fieldset:disabled a.btn {
       box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }
 
 .btn-dark {
-  color: #ffffff;
-  background-color: black;
-  border-color: black; }
+  color: #000000;
+  background-color: #c9eeff;
+  border-color: #c9eeff; }
   .btn-dark:hover {
     color: #ffffff;
     background-color: black;
@@ -4818,7 +4818,7 @@ button.bg-dark:focus {
   text-align: left !important; }
 
 .text-right {
-  text-align: right !important; }
+  text-align: right !important; transition-delay: 2s;}
 
 .text-center {
   text-align: center !important; }
@@ -5086,7 +5086,7 @@ footer a {
 
 /*Gradients*/
 .bg-gradient {
-  background: linear-gradient(#7dbe42, #8eb56a); }
+  background: linear-gradient(#AA77FF, #97DEFF); }
 
 /*Code Window*/
 .code-window {

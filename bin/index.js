@@ -25,10 +25,10 @@ yargs(hideBin(process.argv))
             "./routes/" + argv.route + ".routes.js",
             `//Global route file
             import { Router } from 'express'
-             const router = Router();
-             router.get('',function(req,res,next){
-             }) 
-             export default router;`,
+const router = Router();
+router.get('',function(req,res,next){
+}) 
+export default router;`,
             function (err) {
               if (err) throw err;
               console.log(
@@ -75,7 +75,40 @@ yargs(hideBin(process.argv))
     command: "make:model",
     describe: "Models creation command",
     handler: (argv) => {
-      console.log("Model created successfully...");
+      if (!argv.db || !argv.model) {
+        console.log(chalk.red("[Error...] Please provide arguments"));
+        console.log(
+          chalk.red("example make:model --model=Callrecord --db=mongodb")
+        );
+      } else {
+        if (argv.db == "mongodb") {
+          if (fs.existsSync("models/" + argv.model + ".model.js")) {
+            console.log(argv.model + " model is already exist.");
+          } else {
+            fs.writeFile(
+              "./models/" + argv.model + ".model.js",
+              `import mongoose from "mongoose"
+               var Schema = mongoose.Schema;
+               const ` +
+                argv.model +
+                `Schema  = new Schema({})
+               module.exports = mongoose.model('` +
+                argv.model +
+                `', ` +
+                argv.model +
+                `Schema)`,
+              function (err) {
+                if (err) throw err;
+                console.log(
+                  chalk.green(argv.model + " model is created successfully.")
+                );
+              }
+            );
+          }
+        } else if (argv.db == "sql") {
+          console.log(chalk.bgYellow.bold("WE ARE WORKING ON SQL MODULE !! "));
+        }
+      }
     },
   })
   .parse();
@@ -139,7 +172,58 @@ yargs(hideBin(process.argv))
             );
             fs.writeFile(
               "./app/api/" + argv.feature + "/" + argv.feature + ".routes.js",
-              "//Route is created successfully....",
+
+              `import { Router } from "express";
+              import * as ` +
+                argv.feature +
+                `Controller from "./` +
+                argv.feature +
+                `.controller.js"
+              const router = Router();
+              
+              //GET ALL 
+
+              router.get('/',` +
+                argv.feature +
+                `Controller.getAll` +
+                argv.feature +
+                `);
+                
+                //POST
+
+                router.post('/',` +
+                argv.feature +
+                `Controller.Add` +
+                argv.feature +
+                `);
+
+                //GET BY ID
+
+                router.get('/:id',` +
+                argv.feature +
+                `Controller.` +
+                argv.feature +
+                `ById);
+
+                //UPDATE
+
+                router.post('/update/:id',` +
+                argv.feature +
+                `Controller.Update` +
+                argv.feature +
+                `);
+
+                //DELETE
+
+                router.delete('/delete/:id',` +
+                argv.feature +
+                `Controller.delete` +
+                argv.feature +
+                `);
+
+
+              
+              export default router;`,
               function (err) {
                 if (err) throw err;
                 console.log(
@@ -181,13 +265,73 @@ yargs(hideBin(process.argv))
                 "/" +
                 argv.feature +
                 ".controller.js",
-              "//controller is created successfully....",
+              `import `+argv.feature+` from "../../../models/` +
+                argv.feature +
+                `.model.js";
+              //import Response from "../helpers/Response.helper.js" 
+              
+              //get all
+              
+              export const getAll` +
+                argv.feature +
+                ` = (res,req,next) => {
+                console.log("` +
+                argv.feature +
+                ` get all called");
+              }
+             
+              //Add 
+             
+              export const Add` +
+                argv.feature +
+                ` = (res,req,next) => {
+
+              }
+             
+              //Update
+             
+              export const Update` +
+                argv.feature +
+                ` = (res,req,next) => {
+                
+              }
+             
+              //Get by id
+             
+              export const ` +
+                argv.feature +
+                `ById = (res,req,next) => {
+                
+              }
+
+              //Delete
+              
+              export const delete` +
+                argv.feature +
+                ` = (res,req,next) => {
+                
+              }`,
               function (err) {
                 if (err) throw err;
                 console.log(
                   chalk.green(
                     argv.feature + " controller is created successfully."
                   )
+                );
+              }
+            );
+            fs.writeFile(
+              "./models/" + argv.feature + ".model.js",
+              `import mongoose from 'mongoose';
+              var Schema = mongoose.Schema;
+              const ` +
+                argv.feature +
+                `Schema  = new Schema({})
+                export default mongoose.model("`+argv.feature+`", `+argv.feature+`Schema, "`+argv.feature+`");`,
+              function (err) {
+                if (err) throw err;
+                console.log(
+                  chalk.green(argv.feature + " model is created successfully.")
                 );
               }
             );
@@ -215,22 +359,24 @@ yargs(hideBin(process.argv))
         )
       );
       console.log(
-        chalk.cyanBright("\t Made by : Trupnil barot from xcitech technologies. \n open source framwork a Specially design for build a micro services.")
+        chalk.cyanBright(
+          "\t Made by : Trupnil barot from xcitech technologies. \n open source framwork a Specially design for build a micro services."
+        )
       );
     },
   })
   .parse();
 
-  //Server stat
-  // yargs(hideBin(process.argv))
-  // .usage("About: Light weighted open source micro framework, aspecially deisgn for build micro services")
-  // .option("route", {
-  //   alias: "r",
-  //   describe: "nskeleton make:route --route=<route_name>",
-  //   demandOption: "The width is required.",
-    
-  // })
-  // .parse();
+//Server stat
+// yargs(hideBin(process.argv))
+// .usage("About: Light weighted open source micro framework, aspecially deisgn for build micro services")
+// .option("route", {
+//   alias: "r",
+//   describe: "nskeleton make:route --route=<route_name>",
+//   demandOption: "The width is required.",
+
+// })
+// .parse();
 
 //Jwt authentication file setup
 yargs(hideBin(process.argv))
@@ -238,18 +384,18 @@ yargs(hideBin(process.argv))
     command: "jwt-g",
     describe: "Generate jwt authentication middleware",
     handler: (argv) => {
-      exec.exec('npm i jsonwebtoken', (err, stdout, stderr) => {  
-        if (err) {  
-          console.error(err);  
-          return;  
-        }  
+      exec.exec("npm i jsonwebtoken", (err, stdout, stderr) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
         console.log(stdout);
         if (fs.existsSync("middlewares/jwt-auth.middleware.js")) {
           console.log(chalk.red("[Error...] jwt middleware is already exist"));
         } else {
           fs.writeFile(
             "./middlewares/jwt-auth.middleware.js",
-            `const jwt = require('jsonwebtoken');
+            `import jwt from "jsonwebtoken"
             exports.tokenVerify = function(req,res,next){
                try{
                     let secretKey = process.env.JWT_SECRET_KEY;
@@ -273,15 +419,11 @@ yargs(hideBin(process.argv))
             `,
             function (err) {
               if (err) throw err;
-              console.log(
-                chalk.green("Jwt auth is successfully generated...")
-              );
+              console.log(chalk.green("Jwt auth is generated successfully..."));
             }
           );
         }
-
-        
-      });  
+      });
     },
   })
   .parse();

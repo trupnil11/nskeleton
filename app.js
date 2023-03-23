@@ -11,7 +11,10 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 // MongoDB initiating Connection
-mongoDbConfig.mongoConnect();
+if(process.env.MONGODB_URL){
+   mongoDbConfig.mongoConnect();
+}
+
 // CORS Middleware
 var corsOption = {
 	origin: "*",
@@ -28,5 +31,5 @@ app.use(express.static(__dirname + '/public'));
 app.use('/',Webroute);
 app.use('/api/',ApiRoute);
 app.listen(process.env.PORT,()=>{
-    console.log(`App is listing `+ process.env.PORT);
+    console.log(`App is listing port `+ process.env.PORT);
 })
