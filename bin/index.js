@@ -274,7 +274,7 @@ yargs(hideBin(process.argv))
               
               export const getAll` +
                 argv.feature +
-                ` = (res,req,next) => {
+                ` = (req,res,next) => {
                 console.log("` +
                 argv.feature +
                 ` get all called");
@@ -284,7 +284,7 @@ yargs(hideBin(process.argv))
              
               export const Add` +
                 argv.feature +
-                ` = (res,req,next) => {
+                ` = (req,res,next) => {
 
               }
              
@@ -292,7 +292,7 @@ yargs(hideBin(process.argv))
              
               export const Update` +
                 argv.feature +
-                ` = (res,req,next) => {
+                ` = (req,res,next) => {
                 
               }
              
@@ -300,7 +300,7 @@ yargs(hideBin(process.argv))
              
               export const ` +
                 argv.feature +
-                `ById = (res,req,next) => {
+                `ById = (req,res,next) => {
                 
               }
 
@@ -308,7 +308,7 @@ yargs(hideBin(process.argv))
               
               export const delete` +
                 argv.feature +
-                ` = (res,req,next) => {
+                ` = (req,res,next) => {
                 
               }`,
               function (err) {
