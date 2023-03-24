@@ -366,19 +366,8 @@ yargs(hideBin(process.argv))
     },
   })
   .parse();
-
-//Server stat
-// yargs(hideBin(process.argv))
-// .usage("About: Light weighted open source micro framework, aspecially deisgn for build micro services")
-// .option("route", {
-//   alias: "r",
-//   describe: "nskeleton make:route --route=<route_name>",
-//   demandOption: "The width is required.",
-
-// })
-// .parse();
-
-//Jwt authentication file setup
+  
+  //Jwt authentication file setup
 yargs(hideBin(process.argv))
   .command({
     command: "jwt-g",
@@ -424,6 +413,33 @@ yargs(hideBin(process.argv))
           );
         }
       });
+    },
+  })
+  .parse();
+
+//Generate env 
+yargs(hideBin(process.argv))
+  .command({
+    command: "generate env",
+    describe: "Generate ENV file",
+    handler: (argv) => {
+     // Source file path
+       const sourcePath = './env.example';
+
+// Destination file path
+const destPath = '.env';
+
+// Read the contents of the source file
+fs.readFile(sourcePath, (err, data) => {
+  if (err) throw err;
+  
+  // Write the contents to the destination file
+  fs.writeFile(destPath, data, (err) => {
+    if (err) throw err;
+    console.log('File copied successfully!');
+  });
+});
+      
     },
   })
   .parse();
