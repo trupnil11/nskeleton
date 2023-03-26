@@ -193,7 +193,7 @@ yargs(hideBin(process.argv))
 
                 router.post('/',` +
                 argv.feature +
-                `Controller.create` +
+                `Controller.Add` +
                 argv.feature +
                 `);
 
@@ -201,7 +201,7 @@ yargs(hideBin(process.argv))
 
                 router.get('/:id',` +
                 argv.feature +
-                `Controller.get` +
+                `Controller.` +
                 argv.feature +
                 `ById);
 
@@ -209,7 +209,7 @@ yargs(hideBin(process.argv))
 
                 router.post('/update/:id',` +
                 argv.feature +
-                `Controller.update` +
+                `Controller.Update` +
                 argv.feature +
                 `);
 
@@ -249,79 +249,56 @@ yargs(hideBin(process.argv))
             );
             fs.writeFile(
               "./app/api/" + argv.feature + "/" + argv.feature + ".service.js",
-              `import ${argv.feature}Model from "../../../models/${argv.feature}.model.js";
+              `const db = require('../database');
+const ${argv.feature}Model = require('../models/${argv.feature}');
 
-              export const getAll = async (req,res) => {
-                try {
-                  const ${argv.feature} = await ${argv.feature}Model.find();
-                  return res.json(${argv.feature});
-                } catch (error) {
-                  console.log(error);
-                  throw new Error("Unable to get ${argv.feature}");
-                }
-              }
-              
-              export const getById = async (req,res) => {
-                try {
-                  const { id } = req.params;
-                  const ${argv.feature} = await ${argv.feature}Model.findById(id);
-                  if (!${argv.feature}) {
-                    return res.status(404).json({ error: '${argv.feature} not found' });
-                  }
-                  return res.json(${argv.feature});
-                } catch (error) {
-                  console.log(error);
-                  throw new Error('Unable to get ${argv.feature}');
-                }
-              }
-              
-              export const create = async(req,res) => {
-                try {
-                  const new${argv.feature} = await ${argv.feature}Model.create(req.body);
-                  return res.status(201).json(new${argv.feature});
-                } catch (error) {
-                  console.log(error);
-                  throw new Error("Unable to create ${argv.feature}");
-                }
-              }
-              
-              export const update = async(req,res) => {
-                try {
-                  const { id } = req.params;
-                  const data = req.body;
-                  const updated${argv.feature} = await ${argv.feature}Model.findByIdAndUpdate(id, data, { new: true });
-                  if (!updated${argv.feature}) {
-                    return res.status(404).json({ error: '${argv.feature} not found' });
-                  }
-                  return res.json(updated${argv.feature});
-                } catch (error) {
-                  console.log(error);
-                  throw new Error("Unable to update ${argv.feature}");
-                }
-              }
-              
-              export const deleteById = async (req,res) => {
-                try {
-                  const { id } = req.params;
-                  const deleted${argv.feature} = await ${argv.feature}Model.findByIdAndDelete(id);
-                  if (!deleted${argv.feature}) {
-                    return res.status(404).json({ error: '${argv.feature} not found' });
-                  }
-                  return res.json({ message: '${argv.feature} deleted successfully' });
-                } catch (error) {
-                  console.log(error);
-                  throw new Error("Unable to delete ${argv.feature}");
-                }
-              }
-              
-              export default {
-                getAll,
-                getById,
-                create,
-                update,
-                deleteById
-              };
-              `,
+async function get${argv.feature}(id) {
+  try {
+    const ${argv.feature.toLowerCase()} = await ${argv.feature}Model.findById(id);
+    return ${argv.feature.toLowerCase()};
+  } catch (error) {
+    console.log(error);
+    throw new Error(\`Unable to get ${argv.feature.toLowerCase()}\`);
+  }
+}
+
+async function create${argv.feature}(data) {
+  try {
+    const new${argv.feature} = await ${argv.feature}Model.create(data);
+    return new${argv.feature};
+  } catch (error) {
+    console.log(error);
+    throw new Error(\`Unable to create ${argv.feature.toLowerCase()}\`);
+  }
+}
+
+async function update${argv.feature}(id, data) {
+  try {
+    const updated${argv.feature} = await ${argv.feature}Model.findByIdAndUpdate(id, data, { new: true });
+    return updated${argv.feature};
+  } catch (error) {
+    console.log(error);
+    throw new Error(\`Unable to update ${argv.feature.toLowerCase()}\`);
+  }
+}
+
+async function delete${argv.feature}(id) {
+  try {
+    await ${argv.feature}Model.findByIdAndDelete(id);
+    return \`${argv.feature} deleted successfully\`;
+  } catch (error) {
+    console.log(error);
+    throw new Error(\`Unable to delete ${argv.feature.toLowerCase()}\`);
+  }
+}
+
+module.exports = {
+  get${argv.feature},
+  create${argv.feature},
+  update${argv.feature},
+  delete${argv.feature},
+};
+`,
               function (err) {
                 if (err) throw err;
                 console.log(
@@ -337,8 +314,8 @@ yargs(hideBin(process.argv))
                 "/" +
                 argv.feature +
                 ".controller.js",
- `import Response from "../../../helpers/Response.helper.js";
- import * as ${argv.feature}Service from "./${argv.feature}.service.js";
+ `import { Response } from "../helpers/Response.helper.js";
+ import * as ${argv.feature}Service from "../services/${argv.feature}.service.js";
  
  // get all
  export const getAll${argv.feature} = async (req, res, next) => {

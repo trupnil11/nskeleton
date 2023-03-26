@@ -24,35 +24,36 @@
     <div class="wrapper">
       <aside class="doc__nav">
         <ul>
-          <li class="js-btn selected">Introduction</li>
-          <li class="js-btn">Configuration</li>
-          <li class="js-btn">Generate Routes</li>
-          <li class="js-btn">Generate Middlewares</li>
-          <li class="js-btn">Generate config</li>
-          <li class="js-btn">Generate Helper</li>
-          <li class="js-btn">Generate Utils</li>
-          <li class="js-btn">Generate Feature</li>
-          <li class="js-btn">Generate models</li>
-          <li class="js-btn">About .env</li>
+          <li class="js-btn selected">Getting Started</li>
+          <li class="js-btn">Generate env file</li>
+          <li class="js-btn">Routes</li>
+          <li class="js-btn">Middlewares</li>
+          <li class="js-btn">config</li>
+          <li class="js-btn">Helper</li>
+          <li class="js-btn">Utils</li>
+          <li class="js-btn">Feature</li>
+          <li class="js-btn">models</li>
           <li class="js-btn">Architecture</li>
+          <li class="js-btn">CLI Command lists</li>
         </ul>
       </aside>
       <article class="doc__content">
         <section class="js-section">
           <h3 class="section__title">Introduction</h3>
-          <p>N(node)skeleton is based on mvc, a aspecialy design for micro services and apis, CLI based micro framework</p>
+          <p>N(node)skeleton is based on mvc, a aspecialy design for micro services and apis, CLI based micro framework (Current support only for mongodb database)</p>
           <h3 class="section__title">Installation</h3>
           <div class="code__block code__block--notabs">
             <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+               <b> npx nskeleton-create project_name
+
+                cd project_name
+
+                npm install
+
+                nskeleton generate env
+
+                nskeleton start</b>
               </code>
             </pre>
           </div>
