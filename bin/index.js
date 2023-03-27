@@ -251,63 +251,58 @@ yargs(hideBin(process.argv))
               "./app/api/" + argv.feature + "/" + argv.feature + ".service.js",
               `import ${argv.feature}Model from "../../../models/${argv.feature}.model.js";
 
-              export const getAll = async (req,res) => {
+              export const getAll = async () => {
                 try {
                   const ${argv.feature} = await ${argv.feature}Model.find();
-                  return res.json(${argv.feature});
+                 return ${argv.feature};
                 } catch (error) {
                   console.log(error);
                   throw new Error("Unable to get ${argv.feature}");
                 }
               }
               
-              export const getById = async (req,res) => {
+              export const getById = async (id) => {
                 try {
-                  const { id } = req.params;
+                 
                   const ${argv.feature} = await ${argv.feature}Model.findById(id);
-                  if (!${argv.feature}) {
-                    return res.status(404).json({ error: '${argv.feature} not found' });
-                  }
-                  return res.json(${argv.feature});
+                  return ${argv.feature};
                 } catch (error) {
                   console.log(error);
                   throw new Error('Unable to get ${argv.feature}');
                 }
               }
               
-              export const create = async(req,res) => {
+              export const create = async(data) => {
                 try {
-                  const new${argv.feature} = await ${argv.feature}Model.create(req.body);
-                  return res.status(201).json(new${argv.feature});
+                  const new${argv.feature} = await ${argv.feature}Model.create(data);
+                  return new${argv.feature};
                 } catch (error) {
                   console.log(error);
                   throw new Error("Unable to create ${argv.feature}");
                 }
               }
               
-              export const update = async(req,res) => {
+              export const update = async(id,data) => {
                 try {
-                  const { id } = req.params;
-                  const data = req.body;
                   const updated${argv.feature} = await ${argv.feature}Model.findByIdAndUpdate(id, data, { new: true });
+                  
                   if (!updated${argv.feature}) {
                     return res.status(404).json({ error: '${argv.feature} not found' });
                   }
-                  return res.json(updated${argv.feature});
+                  return updated${argv.feature};
                 } catch (error) {
                   console.log(error);
                   throw new Error("Unable to update ${argv.feature}");
                 }
               }
               
-              export const deleteById = async (req,res) => {
+              export const deleteById = async (id) => {
                 try {
-                  const { id } = req.params;
                   const deleted${argv.feature} = await ${argv.feature}Model.findByIdAndDelete(id);
                   if (!deleted${argv.feature}) {
                     return res.status(404).json({ error: '${argv.feature} not found' });
                   }
-                  return res.json({ message: '${argv.feature} deleted successfully' });
+                 return deleted${argv.feature};
                 } catch (error) {
                   console.log(error);
                   throw new Error("Unable to delete ${argv.feature}");
@@ -344,7 +339,7 @@ yargs(hideBin(process.argv))
  export const getAll${argv.feature} = async (req, res, next) => {
    try {
      const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.getAll();
-     res.status(200).json(Response.success("${argv.feature} found", ${argv.feature.toLowerCase()}));
+     Response.success(res, 200, "Records Fetched Successfully",  ${argv.feature.toLowerCase()});
    } catch (error) {
      next(error);
    }
@@ -357,7 +352,7 @@ yargs(hideBin(process.argv))
      if (!${argv.feature.toLowerCase()}) {
        return res.status(404).json(Response.error("${argv.feature} not found"));
      }
-     res.status(200).json(Response.success("${argv.feature} found", ${argv.feature.toLowerCase()}));
+     Response.success(res, 200, "Single Records Fetched Successfully",  ${argv.feature.toLowerCase()});
    } catch (error) {
      next(error);
    }
@@ -367,7 +362,7 @@ yargs(hideBin(process.argv))
  export const create${argv.feature} = async (req, res, next) => {
    try {
      const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.create(req.body);
-     res.status(201).json(Response.success("${argv.feature} created", ${argv.feature.toLowerCase()}));
+     Response.success(res, 200, "Records Creted Successfully",  ${argv.feature.toLowerCase()});
    } catch (error) {
      next(error);
    }
@@ -380,7 +375,7 @@ yargs(hideBin(process.argv))
      if (!${argv.feature.toLowerCase()}) {
        return res.status(404).json(Response.error("${argv.feature} not found"));
      }
-     res.status(200).json(Response.success("${argv.feature} updated", ${argv.feature.toLowerCase()}));
+     Response.success(res, 200, "Records uddated Successfully",  ${argv.feature.toLowerCase()});
    } catch (error) {
      next(error);
    }
@@ -393,7 +388,7 @@ yargs(hideBin(process.argv))
      if (!${argv.feature.toLowerCase()}) {
        return res.status(404).json(Response.error("${argv.feature} not found"));
      }
-     res.status(200).json(Response.success("${argv.feature} deleted", ${argv.feature.toLowerCase()}));
+     Response.success(res, 200, "Records Deleted Successfully");
    } catch (error) {
      next(error);
    }
