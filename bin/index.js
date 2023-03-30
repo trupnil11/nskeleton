@@ -11,7 +11,7 @@ const argv = yargs(hideBin(process.argv)).argv;
 yargs(hideBin(process.argv))
   .command({
     command: "make:route",
-    describe: "Route file creat function",
+    describe: "Route file create function",
     handler: (argv) => {
       if (!argv.route) {
         console.log(chalk.red("[Error...] Please provide route name"));
@@ -332,13 +332,15 @@ yargs(hideBin(process.argv))
                 "/" +
                 argv.feature +
                 ".controller.js",
- `import Response from "../../../helpers/Response.helper.js";
+              `import Response from "../../../helpers/Response.helper.js";
  import * as ${argv.feature}Service from "./${argv.feature}.service.js";
  
  // get all
  export const getAll${argv.feature} = async (req, res, next) => {
    try {
-     const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.getAll();
+     const ${argv.feature.toLowerCase()} = await ${
+                argv.feature
+              }Service.getAll();
      Response.success(res, 200, "Records Fetched Successfully",  ${argv.feature.toLowerCase()});
    } catch (error) {
      next(error);
@@ -348,7 +350,9 @@ yargs(hideBin(process.argv))
  // get by id
  export const get${argv.feature}ById = async (req, res, next) => {
    try {
-     const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.getById(req.params.id);
+     const ${argv.feature.toLowerCase()} = await ${
+                argv.feature
+              }Service.getById(req.params.id);
      if (!${argv.feature.toLowerCase()}) {
        return res.status(404).json(Response.error("${argv.feature} not found"));
      }
@@ -361,7 +365,9 @@ yargs(hideBin(process.argv))
  // create
  export const create${argv.feature} = async (req, res, next) => {
    try {
-     const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.create(req.body);
+     const ${argv.feature.toLowerCase()} = await ${
+                argv.feature
+              }Service.create(req.body);
      Response.success(res, 200, "Records Creted Successfully",  ${argv.feature.toLowerCase()});
    } catch (error) {
      next(error);
@@ -371,7 +377,9 @@ yargs(hideBin(process.argv))
  // update
  export const update${argv.feature} = async (req, res, next) => {
    try {
-     const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.update(req.params.id, req.body);
+     const ${argv.feature.toLowerCase()} = await ${
+                argv.feature
+              }Service.update(req.params.id, req.body);
      if (!${argv.feature.toLowerCase()}) {
        return res.status(404).json(Response.error("${argv.feature} not found"));
      }
@@ -384,7 +392,9 @@ yargs(hideBin(process.argv))
  // delete
  export const delete${argv.feature} = async (req, res, next) => {
    try {
-     const ${argv.feature.toLowerCase()} = await ${argv.feature}Service.delete(req.params.id);
+     const ${argv.feature.toLowerCase()} = await ${
+                argv.feature
+              }Service.delete(req.params.id);
      if (!${argv.feature.toLowerCase()}) {
        return res.status(404).json(Response.error("${argv.feature} not found"));
      }
@@ -410,7 +420,13 @@ yargs(hideBin(process.argv))
               const ` +
                 argv.feature +
                 `Schema  = new Schema({})
-                export default mongoose.model("`+argv.feature+`", `+argv.feature+`Schema, "`+argv.feature+`");`,
+                export default mongoose.model("` +
+                argv.feature +
+                `", ` +
+                argv.feature +
+                `Schema, "` +
+                argv.feature +
+                `");`,
               function (err) {
                 if (err) throw err;
                 console.log(
@@ -449,8 +465,8 @@ yargs(hideBin(process.argv))
     },
   })
   .parse();
-  
-  //Jwt authentication file setup
+
+//Jwt authentication file setup
 yargs(hideBin(process.argv))
   .command({
     command: "jwt-g",
@@ -500,29 +516,28 @@ yargs(hideBin(process.argv))
   })
   .parse();
 
-//Generate env 
+//Generate env
 yargs(hideBin(process.argv))
   .command({
     command: "generate env",
     describe: "Generate ENV file",
     handler: (argv) => {
-     // Source file path
-       const sourcePath = './env.example';
+      // Source file path
+      const sourcePath = "./env.example";
 
-// Destination file path
-const destPath = '.env';
+      // Destination file path
+      const destPath = ".env";
 
-// Read the contents of the source file
-fs.readFile(sourcePath, (err, data) => {
-  if (err) throw err;
-  
-  // Write the contents to the destination file
-  fs.writeFile(destPath, data, (err) => {
-    if (err) throw err;
-    console.log('File copied successfully!');
-  });
-});
-      
+      // Read the contents of the source file
+      fs.readFile(sourcePath, (err, data) => {
+        if (err) throw err;
+
+        // Write the contents to the destination file
+        fs.writeFile(destPath, data, (err) => {
+          if (err) throw err;
+          console.log("File copied successfully!");
+        });
+      });
     },
   })
   .parse();

@@ -1,27 +1,26 @@
 import { Router } from "express";
-              import * as Test7Controller from "./Test7.controller.js"
-              const router = Router();
-              
-              //GET ALL 
+import * as Test7Controller from "./Test7.controller.js";
 
-              router.get('/',Test7Controller.getAllTest7);
-                
-                //POST
+const router = Router();
 
-                router.post('/',Test7Controller.createTest7);
+//GET ALL
 
-                //GET BY ID
+router.get("/", Test7Controller.getAllTest7);
 
-                router.get('/:id',Test7Controller.getTest7ById);
+//POST
 
-                //UPDATE
+router.post("/", Test7Controller.createTest7);
 
-                router.post('/update/:id',Test7Controller.updateTest7);
+//GET BY ID
 
-                //DELETE
+router.get("/:id", Test7Controller.getTest7ById);
 
-                router.delete('/delete/:id',Test7Controller.deleteTest7);
+//UPDATE
 
+router.post("/update/:id", Test7Controller.updateTest7);
 
-              
-              export default router;
+//DELETE
+
+router.delete("/delete/:id", Test7Controller.deleteTest7);
+
+export default router;
