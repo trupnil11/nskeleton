@@ -1,5 +1,5 @@
 import Response from "../../../helpers/Response.helper.js";
- import * as Test7Service from "./Test7.service.js";
+import * as Test7Service from "./Test7.service.js";
  
  // get all
  export const getAllTest7 = async (req, res, next) => {
