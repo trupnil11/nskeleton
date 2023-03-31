@@ -7,7 +7,7 @@ open-source free to use node framework use ECMA 6 syntax and predefine 3 layer a
 
 - **Languages**:
 
- ![Node](https://img.shields.io/badge/node%20-%2314354C.svg?style=for-the-badge&logo=node&logoColor=white)
+ ![Node](https://img.shields.io/badge/node%20-%2314354C.svg?style=for-the-badge&logo=node&logoColor=brightgreen)
 
 
 - **Softwares and Tools**:
