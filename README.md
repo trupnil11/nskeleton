@@ -33,8 +33,10 @@ To create new project, follow this steps:
 
 1. npx nskeleton-create <project_name>
 2. npm install
-3. nskeleton generate env
-4. nskeleton run
+3. npm install -g npm-link
+4. npm link 
+5. nskeleton generate env
+6. nskeleton run
 
 ## Contributing
 
