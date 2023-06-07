@@ -1,247 +1,304 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" >
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Nskeleton | node js mvc framwork</title>
-    <meta name="description" content="Prism is a beautiful Bootstrap 4 template for open-source landing pages."/>
+  <meta charset="UTF-8">
+  <title>Nskeleton</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+<style>
+    body {
+  background: #dfe9ff;
+  font-family: Lato, sans-serif;
+}
 
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=K2D:300,400,500,700,800" rel="stylesheet">
-
-    <!-- Bootstrap CSS / Color Scheme -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <style>
-        .top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 0;
-  width: 100%;
+nav {
+  height: 50px;
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  z-index: -2;
+  position: relative;
 }
-.strip {
-  height: 0;
-  background-color: black;
-  transition: height 0.5s;
-  line-height: 40px;
-  text-align: center;
-  overflow: hidden;
-  color: #ffff;
-}
-.top.active .strip{
-  height: 40px;
-}
-.button {
-  position: absolute;
-  top: 0;
-  right: 5px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  display: inline-block;
-  background-color: rgb(255, 254, 254);
-  color: #fff;
+nav ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
-.arrow-down {
-  transition: transform 0.5s;
+nav ul li {
+  margin-right: 30px;
+  color: #4b71ff;
 }
-.top.active .arrow-down{
-  transform: rotate(180deg)
+nav ul li:last-child {
+  margin-right: 0px;
 }
-    </style>
+nav .logo {
+  height: 50px;
+  width: 75px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  margin-right: 30px;
+  background-color: #4b71ff;
+  cursor: pointer;
+}
+nav .arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #fff;
+}
+
+.banner {
+  height: auto;
+  margin: 32px 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  .banner {
+    height: 450px;
+    margin-bottom: 32px;
+  }
+}
+.banner .banner-image {
+  position: absolute;
+  opacity: 0.25;
+  right: 0px;
+  top: 0px;
+  height: 300px;
+  z-index: -1;
+  filter: drop-shadow(0 3rem 0.05rem #bfd8ff);
+}
+@media (min-width: 768px) {
+  .banner .banner-image {
+    display: inherit;
+    height: 400px;
+    top: 0px;
+    opacity: 0.5;
+  }
+}
+@media (min-width: 992px) {
+  .banner .banner-image {
+    height: 500px;
+    top: -50px;
+    opacity: 1;
+  }
+}
+.banner .banner-text {
+  max-width: 550px;
+  float: left;
+}
+.banner .banner-text h1 {
+  color: #00106a;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+.banner .banner-text p {
+  color: #00106a;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.banner button {
+  border: 0;
+  border-radius: 50px;
+  padding: 0.75rem 2.75rem;
+  background: #4b71ff;
+  color: #ffffff;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  position: relative;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+}
+.banner button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.25);
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.card {
+  padding: 16px 24px;
+  background: #ffffff;
+  height: 100%;
+  position: relative;
+  border: none;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+}
+.card h3.card-title {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #00106a;
+}
+.card p {
+  color: #989dc5;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 72px;
+}
+.card .card-link {
+  position: absolute;
+  bottom: 18px;
+}
+.card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+.card .card-icon {
+  width: 60px;
+  margin-bottom: 8px;
+  position: relative;
+  top: 0;
+  left: -12px;
+}
+
+footer {
+  background: #00106a;
+  margin: 32px 0 0px;
+  padding: 32px 0;
+}
+footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+footer ul li {
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+</style>
 </head>
 <body>
-    <div class="top">
-        <div class="strip">
-        <p>Learn Node Js From Experts ? Get Appointment</p>
-        </div>
-        <div class="button">
-          <i class="glyphicon glyphicon-chevron-down arrow-down"></i>
+<!-- partial:index.partial.html -->
+<nav>
+  <div class="logo">
+    <div class="arrow-down"></div>
+  </div>
+  <ul>
+    <li>Nskeleton</li>
+    <li>Documentation</li>
+    <li>FAQs</li>
+    <li>Contact</li>
+  </ul>
+</nav>
+<section class="banner">
+  <div class="container">
+    <div class="banner-text">
+      <h1>NodeJs Boilerplate</h1>
+      <p> <strong>N(Node)Skeleton </strong> is a Node.js boilerplate that follows the Model-View-Controller (MVC) architecture. It is specifically designed for developing microservices and APIs. This lightweight framework provides a CLI-based approach, making it easy to scaffold and manage projects.</p>
+      <button>npx nskeleton-create "project_name"</button>
+    </div>
+  </div>
+  <img class="banner-image" src="https://preview.ibb.co/bMi5Y6/banner_img.png" alt="monitoring" >
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="mb-30 col-md-6 col-lg-4">
+      <div class="card">
+      <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >
+      <h3 class="card-title">Project Structure</h3>
+      <p class="card-text"> A boilerplate provides a predefined and organized project structure, helping you save time by avoiding the initial setup and configuration process. It establishes a foundation for your project, including folders for source code, tests, configuration, and more</p>
+      <a class="card-link" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-4">
+      <div class="card">
+      <img class="card-icon" src="https://image.ibb.co/jfmg6R/cloud_firewalls.png" alt="monitoring" >
+      <h3 class="card-title">Best Practices</h3>
+      <p class="card-text">Boilerplates often incorporate best practices and industry-standard patterns for developing Node.js applications. They follow established coding conventions, file organization, and code architecture, ensuring a maintainable and scalable codebase.</p>
+      <a class="card-link" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-4">
+      <div class="card">
+      <img class="card-icon" src="https://image.ibb.co/fcnzt6/team_management.png" alt="team management" >
+      <h3 class="card-title">Preconfigured Dependencies</h3>
+      <p class="card-text">Boilerplates come with preconfigured dependencies and tooling that are commonly used in Node.js projects. This includes popular libraries, frameworks, and tools like Express.js, Sequelize, Webpack, Babel, and ESLint. It eliminates the need for manually setting up and configuring these dependencies, saving development time.</p>
+      <a class="card-link" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-4">
+      <div class="card">
+      <img class="card-icon" src="https://image.ibb.co/evyiLm/backups.png" alt="monitoring" >
+      <h3 class="card-title">Performance and Security</h3>
+      <p class="card-text">Some boilerplates include performance optimizations and security measures out of the box. They may have configurations for caching, compression, security headers, and other techniques to improve the performance and security of your application.</p>
+      <a class="card-link" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-4">
+      <div class="card">
+      <img class="card-icon" src="https://image.ibb.co/g9bERR/snapshots.png" alt="snapshots" >
+      <h3 class="card-title">Testing and Quality Assurance</h3>
+      <p class="card-text"> Many boilerplates include testing frameworks, such as Mocha, Chai, and Jest, along with preconfigured scripts for running tests, code linting, and code formatting. This promotes a test-driven development (TDD) approach and helps ensure code quality.</p>
+      <a class="card-link" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-4">
+      <div class="card">
+      <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >
+      <h3 class="card-title">Rapid Development</h3>
+      <p class="card-text">With a boilerplate, you can quickly start building your application without spending time on repetitive setup tasks. It allows you to focus on the core features and business logic of your application, speeding up the development process.</p>
+      <a class="card-link" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-4">
+        <div class="card">
+        <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >
+        <h3 class="card-title">Community and Support</h3>
+        <p class="card-text">Popular boilerplates often have an active community of developers and maintainers. This means you can find documentation, tutorials, and support from the community when using a widely adopted boilerplate. You can also benefit from bug fixes, updates, and enhancements contributed by the community.</p>
+        <a class="card-link" href="#">Learn more</a>
         </div>
       </div>
-<!--Header Section-->
-<section class="bg-gradient pt-5 pb-6">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 d-flex flex-row align-items-center justify-content-between">
-                <div class="heading-brand">{ Nskeleton }</div>
-                <a href="javascript:void(0)" class="btn btn-dark" target="_blank">Download (1.0.0)</a>
-               
-            </div>
+      <div class="mb-30 col-md-6 col-lg-4">
+        <div class="card">
+        <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >
+        <h3 class="card-title">Customizability</h3>
+        <p class="card-text">While boilerplates provide a solid starting point, they are usually designed to be customizable. You can modify and extend the boilerplate according to your specific project requirements. This flexibility allows you to adapt the structure and configurations to suit your application's needs.</p>
+        <a class="card-link" href="#">Learn more</a>
         </div>
-        <div class="row mt-6">
-            <div class="col-md-8 mx-auto text-center">
-                <h1>Nskeleton node js framework</h1>
-                <p class="lead mb-5">Nskeleton is a lightweight CLI Based, extensible open source node js framework, built with modern web
-                    standards with express js in mind. It’s used in thousands of websites, including some of those you visit daily.</p>
-                <a href="https://github.com/trupnil11/nskeleton" class="btn btn-dark svg-icon">
-                    <em class="mr-2" data-feather="github"></em>
-                    Contribute on github
-                </a>
-                <a href="/documentation" class="btn btn-dark svg-icon">
-                    <em class="mr-2" data-feather="github"></em>
-                    Documentation
-                </a>
-            </div>
+      </div>
+      <div class="mb-30 col-md-6 col-lg-4">
+        <div class="card">
+        <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >
+        <h3 class="card-title">Overall</h3>
+        <p class="card-text">Overall, using a Node.js boilerplate can provide a head start in development, promote best practices, and enhance productivity by streamlining the initial setup process. It allows you to focus on building your application rather than spending time on repetitive and non-business-specific tasks.</p>
+        <a class="card-link" href="#">Learn more</a>
         </div>
-        <div class="row mt-5">
-            <div class="col-md-9 mx-auto">
-                <div class="code-window">
-                    <div class="dots">
-                        <div class="red"></div>
-                        <div class="orange"></div>
-                        <div class="green"></div>
-                    </div>
-                   
-                    <pre class="language-javascript line-numbers"><code  class="language-javascript">git clone https://github.com/trupnil11/nskeleton.git
-
-npm install
-
-nodemon
-</code></pre>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--Features Section-->
-<section class="py-6">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2 class="text-center text-md-left">Reasons Why People Love <span class="text-success">{ Nskeleton }</span></h2>
-                <div class="row feature-grid">
-                    <div class="col-sm-6">
-                        <div class="media">
-                            <div class="icon-box">
-                                <div class="icon-box-inner">
-                                    <span data-feather="check-circle" width="28" height="28"></span>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Dead Simple
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="media">
-                            <div class="icon-box">
-                                <div class="icon-box-inner">
-                                    <span data-feather="command" width="28" height="28"></span>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Highly Intuitive
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="media">
-                            <div class="icon-box">
-                                <div class="icon-box-inner">
-                                    <span data-feather="feather" width="28" height="28"></span>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Light as a Feather
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="media">
-                            <div class="icon-box">
-                                <div class="icon-box-inner">
-                                    <span data-feather="zap" width="28" height="28"></span>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Blazing Fast
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="media">
-                            <div class="icon-box">
-                                <div class="icon-box-inner">
-                                    <span data-feather="git-pull-request" width="28" height="28"></span>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Extensible
-                            </div>
-                        </div>
-                    </div><div class="col-sm-6">
-                        <div class="media">
-                            <div class="icon-box">
-                                <div class="icon-box-inner">
-                                    <span data-feather="droplet" width="28" height="28"></span>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Easy Styling
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--Used By Section-->
-<section class="pb-6">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2 class="text-center text-md-left">Spartans Team</h2>
-                <p class="lead text-muted">Nskeleton is used on several websites, small and large.</p>
-                <div class="mt-5 d-flex flex-row justify-content-md-between flex-wrap press-icons">
-                    <img src="https://logo.clearbit.com/google.com?size=60" alt="Google"/>
-                    <img src="https://logo.clearbit.com/twitter.com?size=60" alt="Twitter"/>
-                    <img src="https://logo.clearbit.com/vuejs.org?size=60" alt="Veu.js"/>
-                    <img src="https://logo.clearbit.com/stripe.com?size=60" alt="Stripe"/>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--footer-->
-<footer class="py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="https://prismjs.com/test.html">Test Drive</a></li>
-                    <li class="list-inline-item"><a href="https://prismjs.com/extending.html">API Docs</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/LeaVerou/prism/">Fork Nskeleton on GitHub</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row my-2">
-            <div class="col-md-4 mx-auto text-muted text-center small-xl">
-                &copy; 2023 Nskeleton - T R U P N I L  &nbsp; B A R O T
-            </div>
-        </div>
-    </div>
+      </div>
+  </div>
+</div>
+<footer>
+  <div class="container">
+  <div class="row">
+   <h5 style="color: white;">Powered By Nskeleton & Team</h5>
+  </div>
+  </div>
 </footer>
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-<script src="js/scripts.js"></script>
-<script>
-    $('.button').on('click', function () {
-  $('.top').toggleClass('active');
-});
-</script>
+<!-- partial -->
+  
 </body>
 </html>
