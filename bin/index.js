@@ -542,15 +542,13 @@ yargs(hideBin(process.argv))
   })
   .parse();
 
-
-  //run project
+//run project
 
 yargs(hideBin(process.argv))
   .command({
     command: "start",
     describe: "Start a project",
     handler: (argv) => {
-     
       exec.exec("nodemon", (err, stdout, stderr) => {
         if (err) {
           console.error(err);
@@ -558,8 +556,6 @@ yargs(hideBin(process.argv))
         }
         console.log(stdout);
       });
-
-
     },
   })
   .parse();
