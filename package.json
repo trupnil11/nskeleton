@@ -1,6 +1,6 @@
 {
   "name": "nskeleton",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nskeleton micro framework 2023 version",
   "main": "app.js",
   "scripts": {
@@ -27,8 +27,8 @@
     "url": "^0.11.0",
     "yargs": "^17.7.1"
   },
-  "preferGlobal": true,
+  "preferGlobal": false,
   "bin": {
-    "nskeleton": "./bin/index.js"
+    "nskeleton": "./bin/entry.js"
   }
 }
