@@ -1,6 +1,6 @@
 {
   "name": "nskeleton",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nskeleton micro framework 2023 version",
   "main": "app.js",
   "scripts": {
