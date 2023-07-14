@@ -17,7 +17,7 @@ program
     console.log(chalk.redBright(figlet.textSync('NSKELETON', { horizontalLayout: 'full' })));
     console.log(
       chalk.cyanBright(
-        '\t Made by: Trupnil barot from xcitech technologies. \n Open-source framework specially designed for building microservices.'
+        '\t Made by: Trupnil Barot. \n Open-source framework specially designed for building microservices.'
       )
     );
   });

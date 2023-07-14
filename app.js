@@ -33,7 +33,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.use('/',Webroute);
 app.use('/api/',ApiRoute);
-//For testing only
+
 // Handle the '/execute-command' route
 app.get('/execute-command', (req, res) => {
   const name = req.query.value;
