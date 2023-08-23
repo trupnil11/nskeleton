@@ -22,7 +22,7 @@ program
     );
   });
 
-  /**
+/**
      * Command Name: nskeleton genearate env
      * Description: To generate .env file
 */
@@ -74,18 +74,6 @@ program
     console.log('Test created successfully.');
   });
 
-  /**
-     * Command Name: nskeleton make:middleware --middleware=middlewareName
-     * Description: Middleware file genenerate in app/middleware folder...
-*/
-
-
-  program
-  .command('make:middleware')
-  .description('middleware creation command')
-  .action((argv) => {
-    console.log('middleware created successfully.');
-  });
 
 /**
      * Command Name: nskeleton make:route --route=routename
@@ -125,6 +113,112 @@ export default router;
     }
   }
 });
+
+/**
+     * Command Name: nskeleton make:middleware --middleware=middlewarename
+     * Description: middleware file genenerate in app/middlewares folder...
+     * Database use only mongoDB
+*/
+
+
+program
+  .command('make:middleware')
+  .description('Middleware file creation command')
+  .option('--middleware <name>', 'Name of the middleware')
+  .action((argv) => {
+    if (!argv.middleware) {
+      console.log(chalk.red('[Error...] Please provide middleware name'));
+    } else {
+      const middlewareFunctionName = argv.middleware + 'Middleware'; // Create dynamic function name
+      if (fs.existsSync(`middlewares/${argv.middleware}.middleware.js`)) {
+        console.log(chalk.red(`[Error...] ${argv.middleware} middleware already exists.`));
+      } else {
+        fs.writeFile(
+          `./middlewares/${argv.middleware}.middleware.js`,
+          `// Blank middleware file
+ const ${middlewareFunctionName} = (req, res, next) => {
+  // Add your middleware logic here
+  next();
+};
+
+export default myMiddleware;
+`,
+          (err) => {
+            if (err) throw err;
+            console.log(chalk.green(`${argv.middleware} middleware created successfully.`));
+          }
+        );
+      }
+    }
+  });
+
+/**
+     * Command Name: nskeleton make:model --model=modelname
+     * Description: Model file genenerate in app/models folder...
+     * Database use only mongoDB
+*/
+
+program
+  .command('make:controller')
+  .description('Controller file creation command')
+  .option('--controller <name>', 'Name of the controller')
+  .action((argv) => {
+    if (!argv.controller) {
+      console.log(chalk.red('[Error...] Please provide controller name'));
+    } else {
+      const controllerName = argv.controller;
+      const controllerFolder = `app/api/${controllerName}`; // Adjusted folder path
+
+      if (!fs.existsSync(controllerFolder)) {
+        fs.mkdirSync(controllerFolder, { recursive: true }); // Create the folder if it doesn't exist
+      }
+
+      if (fs.existsSync(`${controllerFolder}/${controllerName}.controller.js`)) {
+        console.log(chalk.red(`[Error...] ${controllerName} controller already exists.`));
+      } else {
+        fs.writeFile(
+          `./${controllerFolder}/${controllerName}.controller.js`,
+          `// Blank controller file for ${controllerName}
+// Add your controller logic here
+
+const getAll${controllerName} = (req, res, next) => {
+  // Add your logic to get all ${controllerName}s
+};
+
+
+const get${controllerName}ById = (req, res, next) => {
+  // Add your logic to get a ${controllerName} by ID
+};
+
+const create${controllerName} = (req, res, next) => {
+  // Add your logic to create a ${controllerName}
+};
+
+const update${controllerName} = (req, res, next) => {
+  // Add your logic to update a ${controllerName}
+};
+
+const delete${controllerName} = (req, res, next) => {
+  // Add your logic to delete a ${controllerName}
+};
+
+export {
+  getAll${controllerName},
+  get${controllerName}ById,
+  create${controllerName},
+  update${controllerName},
+  delete${controllerName},
+};
+`,
+          (err) => {
+            if (err) throw err;
+            console.log(chalk.green(`${controllerName} controller created successfully.`));
+          }
+        );
+      }
+    }
+  });
+
 
 
 /**

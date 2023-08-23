@@ -11,51 +11,7 @@
       background: linear-gradient(to bottom right, #1a202c, #0f1722);
     }
   </style>
-    <script>
-    function generateRoute() {
-      const routeName = prompt("Please enter the route name:");
-      if (routeName) {
-        fetch('/execute-command?type=route&value='+routeName)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Command executed:', data);
-      })
-      .catch(error => {
-        console.error('Error executing command:', error);
-      });
-      }
-    }
-  </script>
-  <script>
-    function generateModel() {
-      const modelname = prompt("Please enter the model name:");
-      if (modelname) {
-        fetch('/execute-command?type=model&value='+modelname)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Command executed:', data);
-      })
-      .catch(error => {
-        console.error('Error executing command:', error);
-      });
-      }
-    }
-  </script>
-   <script>
-    function generateFeature() {
-      const featurename = prompt("Please enter the feature name: it will generate feature in app/api/featurename");
-      if (featurename) {
-        fetch('/execute-command?type=feature&value='+featurename)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Command executed:', data);
-      })
-      .catch(error => {
-        console.error('Error executing command:', error);
-      });
-      }
-    }
-  </script>
+      <script src="/js/tool/main-tool.js"></script>
 </head>
 
 <body class="bg-gray-900 text-white">
@@ -105,7 +61,7 @@
               </svg>
               <h2 class="text-lg font-bold">Generate Controller</h2>
             </div>
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateController()">
               Generate
             </button>
           </div>
@@ -164,19 +120,19 @@
               Generate
             </button>
           </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Middleware</h2>
+            </div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateMiddleware()">
+              Generate
+            </button>
+          </div>
         </div>
-        <div class="mt-8">
-          <h2 class="text-lg font-bold mb-4">Lesscode Platform</h2>
-          <p>
-            Lesscode is a powerful platform for creating RESTful APIs quickly and efficiently. With its extensive boilerplate generation capabilities, you can kickstart your API development by generating essential code components such as environment configuration, routes, controllers, models, helpers, utilities, and tests.
-          </p>
-          <p>
-            By leveraging Lesscode, you can significantly reduce the time and effort required to set up a robust API project. It eliminates the need to write repetitive boilerplate code from scratch, allowing you to focus on implementing your business logic and delivering high-quality APIs in less time.
-          </p>
-          <p>
-            Visit <a href="https://www.nskleton.com" class="text-blue-500 hover:underline">www.nskleton.com</a> to explore the features and benefits of the Lesscode platform and accelerate your API development process.
-          </p>
-        </div>
+     
       </main>
       
       
