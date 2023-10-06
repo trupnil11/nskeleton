@@ -17,7 +17,7 @@ program
     console.log(chalk.redBright(figlet.textSync('NSKELETON', { horizontalLayout: 'full' })));
     console.log(
       chalk.cyanBright(
-        '\t Made by: Trupnil Barot. \n Open-source framework specially designed for building microservices.'
+        'Developer: Trupnil Barot\nBeta version 1.0.3 - ES6\nOpen-source nodeJs Boilerplate specially designed for building microservices.\nDocumentation : https//nskeleton.com'
       )
     );
   });
@@ -44,7 +44,7 @@ program
      // Write the contents to the destination file
      fs.writeFile(destPath, data, (err) => {
        if (err) throw err;
-       console.log(chalk.green(`.env file generated successfully.`));
+       console.log(chalk.green(`.ENV file generated successfully.`));
      });
    });
  
