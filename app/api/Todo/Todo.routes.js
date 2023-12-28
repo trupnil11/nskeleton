@@ -1,27 +1,27 @@
 import { Router } from "express";
-              import * as TodoController from "./Todo.controller.js"
-              const router = Router();
-              
-              //GET ALL 
+          import * as TodoController from "./Todo.controller.js"
+          const router = Router();
+          
+          //GET ALL 
 
-              router.get('/',TodoController.getAllTodo);
-                
-                //POST
+          router.get('/',TodoController.getAllTodo);
+            
+            //POST
 
-                router.post('/',TodoController.createTodo);
+            router.post('/',TodoController.createTodo);
 
-                //GET BY ID
+            //GET BY ID
 
-                router.get('/:id',TodoController.getTodoById);
+            router.get('/:id',TodoController.getTodoById);
 
-                //UPDATE
+            //UPDATE
 
-                router.post('/update/:id',TodoController.updateTodo);
+            router.post('/update/:id',TodoController.updateTodo);
 
-                //DELETE
+            //DELETE
 
-                router.delete('/delete/:id',TodoController.deleteTodo);
+            router.delete('/delete/:id',TodoController.deleteTodo);
 
 
-              
-              export default router;
+          
+          export default router;
