@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>{N}skeleton Tool</title>
+  <style>
+      body {
+      background: linear-gradient(to bottom right, #1a202c, #0f1722);
+    }
+  </style>
+      <script src="/js/tool/main-tool.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <!-- <div class="bg-gray-800 text-white flex flex-col w-40">
+      <div class="mt-8">
+        <a href="#" class="text-center block p-4">Tool</a>
+        <a href="#" class="text-center block p-4">Documentation</a>
+      </div>
+    </div> -->
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1 overflow-hidden">
+      <header class="bg-gray-700 py-4 px-8">
+        <h1 class="text-xl font-bold">{N}skeleton APIs Genearete Tool</h1>
+      </header>
+      
+      <main class="flex-1 p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate .env</h2>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Route</h2>
+            </div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateRoute()">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Controller</h2>
+            </div>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateController()">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v2H3V3zm0 6h18v2H3V9zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Helper</h2>
+            </div>
+            <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded w-full">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Create Model</h2>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateModel()">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Create Authentication</h2>
+            </div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Unit test</h2>
+            </div>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v2H3V3zm0 6h18v2H3V9zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Feature</h2>
+            </div>
+            <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateFeature()">
+              Generate
+            </button>
+          </div>
+          <div class="bg-gray-800 hover:bg-gray-700 text-white rounded p-4 flex flex-col items-center">
+            <div class="mb-4 flex items-center">
+              <svg class="w-8 h-8 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+              </svg>
+              <h2 class="text-lg font-bold">Generate Middleware</h2>
+            </div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full" onclick="generateMiddleware()">
+              Generate
+            </button>
+          </div>
+        </div>
+     
+      </main>
+      
+      
+    </div>
+  </div>
+
+</div>
+</body>
+<script>
+  document.getElementById('executeButton').addEventListener('click', function() {
+    fetch('/execute-command')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Command executed:', data);
+      })
+      .catch(error => {
+        console.error('Error executing command:', error);
+      });
+  });
+</script>
+</html>
